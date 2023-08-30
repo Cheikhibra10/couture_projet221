@@ -6,20 +6,27 @@
 body {
  overflow-x: hidden;
 }
-.plus{
- position: relative;
- margin-top: -3.5%;
- margin-left: 47.5%;
+
+.checkbox-label-container {
+ display: inline-block;
+ margin-right: 10px; /* Adjust as needed */
 }
+.plusc{
+ position:absolute;
+ margin-top: -1%;
+ margin-left: 45.4%;
+}
+
 .plusf{
- position: relative;
- margin-top: -26%;
- margin-left: 47.5%;
+ position: absolute;
+ margin-top: 1.5%;
+ margin-left: 45.3%;
 }
+
 .plusu{
- position: relative;
- margin-top: -17%;
- margin-left: 47.5%;
+ position: absolute;
+ margin-top: 1.5%;
+ margin-left: 45.1%;
 }
 .four{
  margin-top: 22%;
@@ -35,17 +42,18 @@ body {
  position: relative;
  width: 300px;
  height: 300px;
- margin-left: 52%;
- margin-top: -7%;
+ margin-left: 50.5%;
+ margin-top: -9%;
 }
 
 .image img{
  width: 300px;
- height:32vh;
+ height:30vh;
  cursor: pointer;
 }
+
 .btn2{
- margin-top: -12%;
+ margin-top: -7%;
 }
 
 .formC.error small{
@@ -117,4 +125,18 @@ margin-left:2%;
 .conversion{
  margin-top: -17%;
  margin-left:65%;
+}
+.plusU{
+ position: absolute;
+ margin-top: -10.5%;
+ margin-left:75%;
+ color: black;
+}
+.td-unite {
+ margin-left: -10px; /* Adjust this value to your preference */
+}
+
+.refer{
+ margin-top: 38%;
+ margin-left: 50.5%;
 }

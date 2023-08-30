@@ -22,6 +22,18 @@ class CategorieController extends Controller
     }
 
 
+    public function getUnite()
+    {
+        $data = json_decode(file_get_contents('php://input'), true);
+        $data;
+        $_SESSION['id'] = $data['idCategorie'];
+        // $this->JsonEncode(UniteCategorie::findDetailByAppro(20));
+    }
+
+    public function getUniteCategorie()
+    {
+        $this->JsonEncode(UniteCategorie::findDetailByAppro($_SESSION['id']));
+    }
 
 
     // Instanciez le contrôleur
@@ -50,8 +62,8 @@ class CategorieController extends Controller
 
         Validator::isVide($data["libelle1"], "libelle");
         Validator::isVide($data["unitedefaut"], "unite_libelle");
+        // dd('ok');
         if (Validator::validate()) {
-
             try {
                 $categorie = Categorie::create([
                     "libelle" => $data["libelle1"]
@@ -62,7 +74,8 @@ class CategorieController extends Controller
                 ]);
                 UniteCategorie::create([
                     'idCategorie' => $categorie->id,
-                    "idUnite" => $unite->id
+                    "idUnite" => $unite->id,
+                    "libelle" => $data["unitedefaut"],
                 ]);
             } catch (\PDOException $th) {
                 Validator::$errors['libelle'] = "le libelle existe deja";

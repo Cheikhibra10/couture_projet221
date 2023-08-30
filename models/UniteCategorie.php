@@ -1,44 +1,57 @@
-<?php 
+<?php
+
 namespace App\Models;
 
 use App\Core\Model;
 use App\Models\Unite;
 use App\Models\Categorie;
- 
-class UniteCategorie extends Model{
+
+class UniteCategorie extends Model
+{
     public  int $id;
     public int $idCategorie;
     public int $idUnite;
- 
 
-     protected static function tableName(){
-               return "unitecategorie";
-      }
 
-      //Many-to-One relationship
-      public Categorie $categorieModel;
-      public Unite $uniteModel;
-     
-      public function __construct($id) {
-            $this->id = $id;
+    protected static function tableName()
+    {
+        return "unitecategorie";
+    }
 
+    //Many-to-One relationship
+    public Categorie $categorieModel;
+    public Unite $uniteModel;
+
+    public function __construct()
+    {
+        
         $this->categorieModel = new Categorie();
-        $this->uniteModel = new Unite(); 
-     }
+        $this->uniteModel = new Unite();
+    }
 
-      // public  function categorie(){
-      //   return $this->categorieModel-> find($this->articleConfId);
-      // }
-      
-      // public function appro(){
-      //   return $this->approModel-> find($this->approId);
-      // }
 
-      // public static function findDetailByAppro($approId){
-      //    return parent::query("select * from ".  self::tableName() ." where approId=:approId  ",["approId"=>$approId]);
-      // }
-     
-      public function getId()
+    public  function categorie()
+    {
+        return $this->categorieModel->find($this->idCategorie);
+    }
+
+    public function unite()
+    {
+        return $this->uniteModel->find($this->idUnite);
+    }
+
+    public static function findDetailByAppro($idCategorie)
+    {
+        return parent::query("select * from " .  self::tableName() . " where idCategorie=:idCategorie  ", ["idCategorie" => $idCategorie]);
+    }
+
+
+    /**
+     * Set the value of id
+     *
+     * @return  self
+     */
+    public function getId()
     {
         return $this->id;
     }
@@ -57,7 +70,7 @@ class UniteCategorie extends Model{
 
     /**
      * Get the value of libelle
-     */ 
+     */
     // public function getQteAppro()
     // {
     //     return $this->qteAppro;
@@ -67,12 +80,12 @@ class UniteCategorie extends Model{
      * Set the value of libelle
      *
      * @return  self
-     */ 
-  
+     */
+
 
     /**
      * Get the value of prix
-     */ 
+     */
     // public function getArticleConfId()
     // {
     //     return $this->categoConfId;
@@ -82,23 +95,10 @@ class UniteCategorie extends Model{
      * Set the value of prix
      *
      * @return  self
-     */ 
- 
+     */
+
 
     /**
      * Get the value of qteStock
-     */ 
-  
-     public static function ajout_approarticleconfection_db(array $approArticle) {
-      $bdd = parent::openConnexion();
-      try {
-          $sql = "INSERT INTO detail_appro_article_conf(qteAppro, articleConfId, approId) VALUES(:qteAppro, :articleConfId, :approId)";
-          $stmt = $bdd->prepare($sql);
-          $stmt->execute($approArticle);
-          $bdd = null;
-          return true;
-      } catch (\Throwable $th) {
-          return false;
-      }
-   }
+     */
 }

@@ -3,10 +3,11 @@
 namespace App\Controllers\Api;
 
 use App\Core\Session;
+use App\Models\Unite;
 use App\Core\Validator;
 use App\Core\Controller;
 use App\Models\Categorie;
-use App\Models\Unite;
+use App\Models\UniteCategorie;
 
 class UniteController extends Controller
 {
@@ -46,15 +47,25 @@ class UniteController extends Controller
     public function store()
     {
         $data = json_decode(file_get_contents('php://input'), true);
-
-        Validator::isVide($data["libelle"], "libelle");
+        $extractedValues = $data['extractedValues'];
+        Validator::isVide($data["libelle"], "idCategorie");
         if (Validator::validate()) {
+            // dd('ok');
             try {
-                Unite::create([
-                    "libelle" => $data["libelle"]
-                ]);
+                foreach ($extractedValues  as $value) {
+                    $unite = Unite::create([
+                        "unite_libelle" => $value["unite"],
+                    ]);
+
+                    UniteCategorie::create([
+                        'idCategorie' => $data["libelle"],
+                        "idUnite" => $unite->id,
+                        "libelle" => $value["unite"],
+                        "conversion" => $value["convertion"]
+                    ]);
+                }
             } catch (\PDOException $th) {
-                Validator::$errors['libelle'] = "le libelle existe deja";
+                // Validator::$errors['libelle'] = "le libelle existe deja";
                 // die($th->getMessage());
             }
         }

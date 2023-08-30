@@ -4,6 +4,7 @@ use App\Controllers\ApproController;
 use App\Controllers\ArticleConfectionController;
 use App\Controllers\ArticleVenteController;
 use App\Controllers\CategorieController;
+use App\Controllers\UniteCategorieController;
 use App\Core\Router;
 
 Router::route("/categorie", [CategorieController::class, 'index']);
@@ -19,3 +20,4 @@ Router::route("/appro-add", [ApproController::class, 'create']);
 Router::route("/store-appro", [ApproController::class, 'store']);
 Router::route("/articlevente-add", [ArticleVenteController::class, 'create']);
 Router::route("/articlevente-getData", [ArticleVenteController::class, 'index']);
+Router::route("/unitecategorie", [UniteCategorieController::class, 'index']);

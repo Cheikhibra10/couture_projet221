@@ -3,23 +3,27 @@
 namespace App\Models;
 
 use App\Core\Model;
+use App\Core\Database;
+use App\Models\Categorie;
+use App\Models\Fournisseur;
 
 class ArticleConfection extends Model
 {
     public int $id;
     public string $libelle;
-    public int $prixAchat;
     public int $qteStock;
+    public int $prixAchat;
     public string|null $photo;
+    public string|null $reference;
     protected static function tableName()
     {
         return "articleconfection";
     }
     //Cle etrangere
-    public int $categorieId;
+    public int $idCategorie;
     private  Categorie $categorieModel;
 
-    public int $fournisseurId;
+    public int $idFournisseur;
     private  Fournisseur $fournisseurModel;
     public function __construct()
     {
@@ -30,11 +34,11 @@ class ArticleConfection extends Model
     //Navigabite   ManyToOne
     public function categorie()
     {
-        return  $this->categorieModel->find($this->categorieId);
+        return  $this->categorieModel->find($this->idCategorie);
     }
     public function fournisseur()
     {
-        return  $this->fournisseurModel->find($this->fournisseurId);
+        return  $this->fournisseurModel->find($this->idFournisseur);
     }
     /**
      * Get the value of id
@@ -136,7 +140,43 @@ class ArticleConfection extends Model
         return $this;
     }
 
-    /* public function create(){
-            
-        }*/
+   
+    public function getReference()
+    {
+        return $this->reference;
+    }
+
+    /**
+     * Set the value of photo
+     *
+     * @return  self
+     */
+    public function setReference($reference)
+    {
+        $this->reference = $reference;
+
+        return $this;
+    }
+
+
+    public static function pagination($page, $itemsPerPage)
+    {
+        $offset = ($page - 1) * $itemsPerPage;
+
+        // Open database connection using Database class
+        $pdo = Database::openConnexion();
+
+        $query = "SELECT * FROM articleconfection LIMIT :limit OFFSET :offset";
+        $statement = $pdo->prepare($query);
+        $statement->bindValue(':limit', $itemsPerPage, \PDO::PARAM_INT);
+        $statement->bindValue(':offset', $offset, \PDO::PARAM_INT);
+        $statement->execute();
+
+        $paginatedData = $statement->fetchAll(\PDO::FETCH_ASSOC);
+
+        // Close the database connection
+        Database::closeConnexion();
+
+        return $paginatedData;
+    }
 }
