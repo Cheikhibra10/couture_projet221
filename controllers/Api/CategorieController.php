@@ -18,9 +18,19 @@ class CategorieController extends Controller
      */
     public function index()
     {
-        $this->JsonEncode(Categorie::all());
+        $filteredCategories = Categorie::findEtat(0);
+        $jsonCategories = json_encode($filteredCategories);
+    
+        echo $jsonCategories; // Output JSON data
     }
-
+    
+    public function index1()
+    {
+        $filteredCategories = Categorie::findEtat(1);
+        $jsonCategories = json_encode($filteredCategories);
+    
+        echo $jsonCategories; // Output JSON data
+    }
 
     public function getUnite()
     {

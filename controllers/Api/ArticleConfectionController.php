@@ -68,6 +68,7 @@ class ArticleConfectionController extends Controller
                 "idFournisseur" => $requestData["fournisseur"],
                 "photo" => $imageData // Store the base64 image data in the database
             ]);
+            
 
             // Send JSON response
             $response = ['success' => true];

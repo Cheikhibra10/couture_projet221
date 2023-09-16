@@ -16,10 +16,12 @@ class CategorieController extends Controller
    */
   public function index()
   {
-    $datas = Categorie::all();
-    // dd($datas);
-    $this->view('categorie/liste', ["datas" => $datas]);
+    $filteredCategories = Categorie::findEtat(1);
+
+    dd($filteredCategories);
+    $this->view('categorie/liste', ["datas" => $filteredCategories]);
   }
+
   // Instanciez le contrôleur
 
 
@@ -34,7 +36,7 @@ class CategorieController extends Controller
   {
     // $datas = Categorie::all();
     // dd($datas);
-$this->view("categorie/liste");
+    $this->view("categorie/liste");
   }
 
   /**

@@ -6,7 +6,7 @@ use App\Core\Validator;
 use App\Core\Controller;
 use App\Models\UniteCategorie;
 
-class UniteCategorieController extends Controller
+class ArticleTailleController extends Controller
 {
      /**
       * ArticleConfection

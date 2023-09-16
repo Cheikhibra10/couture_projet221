@@ -1,5 +1,6 @@
 <?php
 
+use App\Controllers\Api\ArticleTailleController;
 use App\Controllers\ApproController;
 use App\Controllers\ArticleConfectionController;
 use App\Controllers\ArticleVenteController;
@@ -13,6 +14,8 @@ Router::route("/store-categorie", [CategorieController::class, 'store']);
 Router::route("/article", [ArticleConfectionController::class, 'index']);
 Router::route("/article_add", [ArticleConfectionController::class, 'create']);
 Router::route("/store-article", [ArticleConfectionController::class, 'store']);
+Router::route("/store-vente", [ArticleVenteController::class, 'store']);
+Router::route("/store-articletaille", [ArticleTailleController::class, 'store']);
 Router::route("/appro", [ApproController::class, 'index']);
 Router::route("/update-paiement-appro", [ApproController::class, 'updatePaiement']);
 Router::route("/filterall", [ApproController::class, 'show_all_appro']);

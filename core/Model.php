@@ -29,7 +29,11 @@ namespace App\Core;
          public static function find($id){
            return self::query('SELECT * FROM '.static::tableName().' WHERE id = :id',["id"=>$id],true); 
          }
-
+         public static function findEtat($etat)
+         {
+             return self::query('SELECT * FROM '.static::tableName().' WHERE etat = :etat', ["etat" => $etat]);
+         }
+         
          //executeUpdate()
          
          public static function create($data){ 
